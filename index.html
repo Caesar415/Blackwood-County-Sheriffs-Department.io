@@ -25,7 +25,6 @@
                 radial-gradient(circle at 80% 70%, rgba(212, 175, 55, 0.05) 0%, transparent 50%);
         }
 
-        /* НАВИГАЦИЯ */
         nav {
             position: fixed;
             top: 0; left: 0; width: 100%;
@@ -80,7 +79,6 @@
         }
         .discord-btn:hover { background: #4752C4; transform: translateY(-2px); }
 
-        /* СЕКЦИИ */
         main { padding-top: 100px; min-height: 100vh; }
         
         section {
@@ -100,7 +98,6 @@
         h2 { font-size: 2rem; margin-bottom: 30px; text-transform: uppercase; color: var(--accent); }
         p { line-height: 1.6; color: var(--text-muted); margin-bottom: 20px; }
 
-        /* ВИДЕО */
         .video-wrapper {
             margin: 50px auto 0;
             max-width: 900px;
@@ -155,7 +152,6 @@
             text-align: right;
         }
 
-        /* КОМАНДОВАНИЕ */
         .command-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
@@ -240,7 +236,6 @@
             display: inline-block;
         }
 
-        /* ОТДЕЛЫ */
         .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; margin-top: 30px; }
         .card {
             background: var(--glass);
@@ -252,7 +247,6 @@
         .card:hover { transform: translateY(-5px); border-color: #fff; }
         .card h3 { color: var(--accent); margin-bottom: 10px; font-size: 1.2rem; }
 
-        /* ФОРМА ЗАЯВКИ */
         .form-box {
             max-width: 600px;
             background: var(--glass);
@@ -348,7 +342,6 @@
     </nav>
 
     <main>
-        <!-- ГЛАВНАЯ -->
         <section id="home" class="active">
             <div class="container">
                 <h1>Protect & Serve<br><span style="color: var(--accent);">Blackwood County</span></h1>
@@ -372,14 +365,12 @@
             </div>
         </section>
 
-        <!-- КОМАНДОВАНИЕ -->
         <section id="command">
             <div class="container">
                 <h2 style="text-align: center;">Высшее Командование</h2>
                 <p style="text-align: center;">Руководство департамента, принимающее стратегические решения.</p>
                 
                 <div class="command-grid">
-                    <!-- ШЕРИФ -->
                     <div class="officer-card" style="border-color: var(--accent);">
                         <div class="officer-avatar">
                             <div class="avatar-placeholder">★</div>
@@ -389,7 +380,6 @@
                         <div class="officer-rank">Шериф</div>
                     </div>
 
-                    <!-- ЗАМ 1 -->
                     <div class="officer-card">
                         <div class="officer-avatar">
                             <div class="avatar-placeholder vacancy">?</div>
@@ -401,7 +391,6 @@
                         <span class="vacancy-badge">Вакансия</span>
                     </div>
 
-                    <!-- ЗАМ 2 -->
                     <div class="officer-card">
                         <div class="officer-avatar">
                             <div class="avatar-placeholder vacancy">?</div>
@@ -413,7 +402,6 @@
                         <span class="vacancy-badge">Вакансия</span>
                     </div>
 
-                    <!-- ЗАМ 3 -->
                     <div class="officer-card">
                         <div class="officer-avatar">
                             <div class="avatar-placeholder vacancy">?</div>
@@ -428,7 +416,6 @@
             </div>
         </section>
 
-        <!-- ОТДЕЛЫ -->
         <section id="divisions">
             <div class="container">
                 <h2>Подразделения Департамента</h2>
@@ -453,7 +440,6 @@
             </div>
         </section>
 
-        <!-- ЗАЯВКА -->
         <section id="apply">
             <div class="container">
                 <h2 style="text-align: center;">Подача заявки в Академию</h2>
@@ -539,7 +525,6 @@
                 return;
             }
 
-            // Проверка протокола (для локального файла)
             if (window.location.protocol === 'file:') {
                 alert("⚠️ Сайт открыт как локальный файл. Отправка в Discord заблокирована браузером.\n\n" +
                       "Решения:\n" +
@@ -572,7 +557,9 @@
             submitBtn.disabled = true;
 
             const formData = new FormData();
-            const botAvatarUrl = "WebHook1.jpg"; 
+            
+            // 🔧 ИСПРАВЛЕНИЕ: полная ссылка на аватарку с GitHub Pages
+            const botAvatarUrl = "https://caesar415.github.io/Blackwood-County-Sheriffs-Department.github.io/WebHook1.jpg"; 
 
             const embedData = {
                 username: "Ministry of Justice",
