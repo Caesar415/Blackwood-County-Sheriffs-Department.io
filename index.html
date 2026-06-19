@@ -448,12 +448,12 @@
                 
                 <form id="recruitForm" class="form-box">
                     <div class="form-group">
-                        <label>Имя и Фамилия (IC)</label>
-                        <input type="text" id="ic_name" required placeholder="Пример: Уильям Кэмерон">
+                        <label>Ваш никнейм</label>
+                        <input type="text" id="nickname" required maxlength="32" placeholder="Например: Caesar_RAF">
                     </div>
                     <div class="form-group">
-                        <label>Ваш Discord Tag</label>
-                        <input type="text" id="discord_tag" required placeholder="username">
+                        <label>Имя и Фамилия (IC)</label>
+                        <input type="text" id="ic_name" required placeholder="Пример: Уильям Кэмерон">
                     </div>
                     <div class="form-group">
                         <label>Возраст (IC) - строго от 18 до 45</label>
@@ -463,6 +463,41 @@
                         <label>Почему хотите в BCSD?</label>
                         <textarea id="reason" required placeholder="Опишите вашу мотивацию..."></textarea>
                     </div>
+                    					<div class="form-group">
+						<label>Discord ID</label>
+
+						<input
+							type="text"
+							id="discord_id"
+							required
+							pattern="[0-9]{17,20}"
+							placeholder="Например: 1517544529576595698">
+
+						<div style="
+							margin-top:10px;
+							padding:12px;
+							border:1px solid rgba(212,175,55,.3);
+							border-radius:6px;
+							background:rgba(0,0,0,.25);
+							font-size:.85rem;
+							line-height:1.6;
+							color:#bdbdbd;
+						">
+							<strong style="color:#d4af37;">Как получить Discord ID:</strong>
+							<br>
+							1. Откройте Discord
+							<br>
+							2. Перейдите в Настройки пользователя
+							<br>
+							3. Откройте раздел "Режим разработчика"
+							<br>
+							4. Включите "Режим разработчика"
+							<br>
+							5. Нажмите ПКМ по своему профилю
+							<br>
+							6. Выберите "Копировать ID"
+						</div>
+					</div>
                     
                     <div class="form-group">
                         <label>Скриншот паспорта (IC)</label>
@@ -470,6 +505,19 @@
                         <span class="file-hint">Поддерживаются форматы: .png, .jpg, .jpeg (макс. 5 МБ)</span>
                     </div>
 
+					<div class="form-group">
+						<label style="display:flex;gap:10px;align-items:flex-start;">
+							<input
+								type="checkbox"
+								id="discord_confirm"
+								required
+								style="width:auto;margin-top:4px;">
+
+							<span>
+								Я состою на Discord-сервере BCSD и указал свой настоящий Discord ID.
+							</span>
+						</label>
+					</div>
                     <button type="submit" class="submit-btn">Отправить заявку</button>
                 </form>
             </div>
@@ -556,7 +604,16 @@
             const submitBtn = document.querySelector('.submit-btn');
             submitBtn.textContent = "Отправка...";
             submitBtn.disabled = true;
+            const discordId =
+            document.getElementById('discord_id').value.trim();
 
+            if (!/^\d{17,20}$/.test(discordId)) {
+                alert(
+                    "❌ Укажите корректный Discord ID."
+                );
+                return;
+            }
+            
             const formData = new FormData();
             
             // 🔧 ИСПРАВЛЕНИЕ: полная ссылка на аватарку с GitHub Pages
@@ -568,12 +625,36 @@
                 embeds: [{
                     title: "📝 Новая заявка в Академию BCSD",
                     color: 0xD4AF37,
-                    fields: [
-                        { name: "👤 IC Name", value: document.getElementById('ic_name').value, inline: true },
-                        { name: "💬 Discord", value: document.getElementById('discord_tag').value, inline: true },
-                        { name: "🎂 Age (IC)", value: age + " лет", inline: true },
-                        { name: "📝 Мотивация", value: document.getElementById('reason').value }
-                    ],
+					fields: [
+						{
+							name: "🎮 Никнейм",
+							value: document.getElementById('nickname').value,
+							inline: true
+						},
+						{
+							name: "👤 IC Name",
+							value: document.getElementById('ic_name').value,
+							inline: true
+						},
+						{
+							name: "🆔 Discord ID",
+							value: document.getElementById('discord_id').value,
+							inline: false
+						},
+						{
+							name: "🎂 Возраст (IC)",
+							value: age + " лет",
+							inline: true
+						},
+						{
+							name: "📝 Мотивация",
+							value: document.getElementById('reason').value
+						},
+						{
+							name: "🌐 Источник",
+							value: "Сайт BCSD"
+						}
+					],
                     footer: { text: "Blackwood County Sheriff's Department" },
                     timestamp: new Date().toISOString()
                 }]
